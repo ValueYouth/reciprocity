@@ -1,6 +1,6 @@
 ### 什么是Hash
 
-* Hash function：A hash function is any function that can be used to map data of arbitrary(任意的) size to data of fixed(固定的) size. The values returned by a hash function are called hash values, hash codes, digests, or simply hashes. One use is a data structure called a hash table, widely used in computer software for rapid data lookup.<br/><br/>
+* Hash function：A hash function is any function that can be used to map data of arbitrary(任意的) size to data of fixed(固定的) size. The values returned by a hash function are called hash values, hash codes, digests, or simply hashes. One use is a data structure called a hash table, widely used in computer software for rapid data lookup.<br><br>
 哈希函数就是能将任意长度的数据映射为固定长度的数据的函数。哈希函数返回的值被叫做哈希值、哈希码、散列，或者直接叫做哈希。一个使用场景就是哈希表，哈希表被广泛用于快速搜索数据。
 
 * Hash table: a hash table (hash map) is a data structure which implements an associative array abstract data type, a structure that can map keys to values. A hash table uses a hash function to compute an index into an array of buckets or slots, from which the desired value can be found. <br><br>
@@ -19,8 +19,7 @@
 
 ### 冲突解决
 
-* **开放定址法** 即当一个关键字和另一个关键字发生冲突时，使用某种探测技术在Hash表中形成一个探测序列，然后沿着这个探测序列依次查找下去，当碰到一个空的单元时，则插入其中。
-<br/>
+* **开放定址法** 即当一个关键字和另一个关键字发生冲突时，使用某种探测技术在Hash表中形成一个探测序列，然后沿着这个探测序列依次查找下去，当碰到一个空的单元时，则插入其中。<br>
 比较常用的探测方法有线性探测法，比如有一组关键字{12，13，25，23，38，34，6，84，91}，Hash表长为14，Hash函数为address(key)=key%11，当插入12，13，25时可以直接插入，而当插入23时，地址1被占用了，因此沿着地址1依次往下探测(探测步长可以根据情况而定)，直到探测到地址4，发现为空，则将23插入其中。
 
 * **链地址法** 采用数组和链表相结合的办法，将Hash地址相同的记录存储在一张线性表中，而每张表的表头的序号即为计算得到的Hash地址。
