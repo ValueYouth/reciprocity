@@ -8,7 +8,8 @@
 * 配置mysql环境变量：我的电脑->属性->高级->环境变量->系统变量，编辑Path变量：mysql bin文件夹的路径
 * 在mysql安装目录根目录下，新建文件夹data
 * 在mysql安装目录根目录下，添加配置文件settings.ini
-* 以管理员身份运行命令行，并cd至mysql安装文件夹下的bin文件夹。运行命令`mysqld -install`
+* 运行初始化命令：`mysqld --initialize` （管理员身份）
+* 运行安装命令：`mysqld -install`（管理员身份）
 
 ### 常用命令
 * 启动服务：`net start mysql`
