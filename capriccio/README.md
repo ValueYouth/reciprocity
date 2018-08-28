@@ -4,3 +4,5 @@
   我的生活哲学很简单：把空的装满，把满的倒空，哪里痒抓哪里。——艾丽斯·罗斯福·朗沃思
 * You laugh at me because I'm different, I laugh at you because you're all the same. Jonathan Davis<br>
   你嘲笑我和别人不一样，我嘲笑你和大家都一样。——乔纳森·戴维斯
+* Beauty is only skin deep, but ugly goes clean to the bone. Dorothy Parker<br>
+  美貌固然肤浅，丑陋却能深入骨髓。——多萝西·帕克
