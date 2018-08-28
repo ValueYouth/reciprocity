@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Intersection Observer API</title>
+    <style>
+        html, body {
+            margin: 0;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        body:after {
+            content: 'Click to update';
+            position: absolute;
+            font-size: .9em;
+            color: rgba(255, 255, 255, .5);
+            bottom: 1em;
+            font-family: Helvetica;
+        }
+        button{
+            font-family: 'Helvetica', 'Arial', sans-serif;
+            display: inline-block;
+            font-size: 1em;
+            padding: 1em 2em;
+            margin-top: 100px;
+            margin-bottom: 60px;
+            -webkit-appearance: none;
+            appearance: none;
+            background-color: #ff0081;
+            color: #fff;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            transition: transform ease-in 0.1s, box-shadow ease-in 0.25s;
+            box-shadow: 0 2px 25px rgba(255, 0, 130, 0.5);
+            outline: none;
+        }
+        button:active{
+            transform: scale(0.9);
+            background-color: #ff0088;
+            box-shadow: 0 2px 25px rgba(255, 0, 130, 0.2);
+        }
+    </style>
+</head>
+<body>
+<css-doodle>
+    --radius: 3%;
+    --dist: 300%;
+    --color: #ff3366;
+    --time: 1s;
+    --delay: calc(-@index() * var(--time) / @size());
+
+    :doodle { @grid: 12x1 / 80vmin }
+    @place-cell: center;
+    @size: var(--radius);
+
+    transform-origin: calc(var(--dist) * -1) center;
+    transform:
+    translateX(calc(var(--dist) + 50%))
+    rotate(calc(360deg / @size() * @index()));
+
+    :after {
+    content: '';
+    display: block;
+    @size: 100%;
+    background: var(--color);
+    border-radius: 50%;
+    animation: spin var(--time)
+    infinite ease-in-out var(--delay);
+    }
+
+    @keyframes spin {
+    0%, 100% { opacity: 1; transform: scale(1) }
+    20% { opacity: 1 }
+    80% { opacity: 0; transform: scale(0) }
+    }
+</css-doodle>
+<button>hello</button>
+<!--<css-doodle>-->
+    <!--:doodle {-->
+    <!--@size: 100vmax;-->
+    <!--background-blend-mode: difference;-->
+    <!--filter: hue-rotate(-60deg);-->
+    <!--background: @multi(100, (-->
+    <!--linear-gradient(-->
+    <!--@r(360deg),-->
+    <!--@multi(10, @pick(blue, #fff))-->
+    <!--),-->
+    <!--radial-gradient(-->
+    <!--@multi(10, @pick(blue, #fff))-->
+    <!--)-->
+    <!--));-->
+    <!--}-->
+<!--</css-doodle>-->
+<div id="app">
+    <div class="observer"></div>
+</div>
+<div id="app2">
+    <!--<ul> <li class="list-item" v-for="item in items" :key="item.id">{{ item.name }}</li> </ul>-->
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/css-doodle/0.3.0/css-doodle.min.js"></script>
+<script>
+    var app = new Vue({
+        el: '#app',
+        props:['options'],
+        data: () => ({
+            observer: null
+        }),
+        mounted() {
+            const options = this.options || {};
+            this.observer = new IntersectionObserver(([entry]) => {
+                if (entry && entry.isIntersecting) {
+                    this.$emit('intersect')
+                }
+            }, options);
+        },
+        destroyed() {
+            this.observer.disconnect();
+        }
+    });
+    var app2 = new Vue({
+
+    });
+</script>
+</body>
+</html>
