@@ -1,0 +1,13 @@
+.DS_Store
+.cache
+/.idea/
+target/
+*.iml
+
+# Editor directories and files
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+src/assets/styles/element-theme/

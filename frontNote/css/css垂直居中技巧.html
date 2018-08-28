@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>css垂直居中技巧</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            margin-bottom: 100px;
+        }
+        h4{
+            text-align: center;
+            margin: 10px auto;
+        }
+        .content{
+            background-color: aquamarine;
+            width: 200px;
+        }
+        .lhCenter{
+            width: 300px;
+            background-color: aquamarine;
+            line-height: 50px;
+            margin: auto;
+            text-align: center;
+        }
+        .lh_in_box{
+            width: 300px;
+            border: 1px solid aquamarine;
+            line-height: 200px;
+            margin: 10px auto;
+            text-align: center;
+        }
+        .lh_in_box .content{
+            width: 200px;
+            height: auto;
+            display: inline-block;
+            background-color: aquamarine;
+            line-height: 1;
+        }
+        .be_in_box{
+            width: 300px;
+            border: 1px solid aquamarine;
+            margin: auto;
+            text-align: center;
+            height: 200px;
+        }
+        .be_in_box:before{
+            content: '';
+            display: inline-block;
+            height: 100%;
+            width: 0;
+            vertical-align: middle;
+        }
+        .be_in_box .content{
+            width: 200px;
+            display: inline-block;
+            background-color: aquamarine;
+            vertical-align: middle;
+        }
+        .ab_ma_box{
+            width: 300px;
+            border: 1px solid aquamarine;
+            margin: auto;
+            height: 200px;
+            position: relative;
+        }
+        .ab_ma_box .content{
+            width: 200px;
+            background-color: aquamarine;
+            height: 100px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: -50px;
+            margin-left: -100px;
+        }
+        .ab_ma_au_box,.ab_tr_box{
+            width: 300px;
+            border: 1px solid aquamarine;
+            margin: auto;
+            height: 200px;
+            position: relative;
+        }
+        .ab_ma_au_box .content{
+            width: 200px;
+            height: 30%;
+            background-color: aquamarine;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+        }
+        .ab_tr_box .content{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .fl_box{
+            width: 300px;
+            border: 1px solid aquamarine;
+            margin: auto;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .fl_be_gr_box{
+            width: 300px;
+            border: 1px solid aquamarine;
+            margin: auto;
+            height: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /*justify-content: center;*/
+        }
+        .fl_be_gr_box:before{
+            content: '';
+            flex-grow: .5;
+        }
+        .fl_ma_box{
+            width: 300px;
+            height: 200px;
+            border: 1px solid aquamarine;
+            margin: auto;
+            display: flex;
+        }
+        .fl_ma_box .content{
+            margin: auto;
+        }
+        .fl_alc_box{
+            width: 300px;
+            height: 200px;
+            border: 1px solid aquamarine;
+            margin: auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-content: center;
+        }
+        .fl_alc_box:before,.fl_alc_box:after{
+            content: '';
+            display: block;
+            width: 100%;
+        }
+        .gr_te_box{
+            width: 300px;
+            height: 200px;
+            border: 1px solid aquamarine;
+            margin: auto;
+            display: grid;
+            grid-template-rows: 1fr auto 1fr;
+            grid-template-columns: 1fr auto 1fr;
+            grid-template-areas:
+                '. . .'
+                '. amos .'
+                '. . .';
+        }
+        .gr_te_box .content{
+            grid-area: amos;
+        }
+        .gr_al_box{
+            width: 300px;
+            height: 200px;
+            border: 1px solid aquamarine;
+            margin: auto;
+            display: grid;
+            justify-content: center;
+            /*align-items: center;*/
+            /*align-items: center;*/
+        }
+        .gr_al_box .content{
+            align-self: center;
+        }
+        .gr_pl_box{
+            width: 300px;
+            height: 200px;
+            border: 1px solid aquamarine;
+            margin: auto;
+            display: grid;
+            /*place-items: center;*/
+            place-content: center;
+        }
+        .gr_ma_box{
+            width: 300px;
+            height: 200px;
+            border: 1px solid aquamarine;
+            margin: auto;
+            display: grid;
+        }
+        .gr_ma_box .content{
+            margin: auto;
+        }
+        .ta_box{
+            width: 300px;
+            height: 200px;
+            border: 1px solid aquamarine;
+            margin: auto;
+            text-align: center;
+            display: table-cell;
+            vertical-align: middle;
+        }
+        .ta_box .content{
+            margin: auto;
+        }
+        .calc_box{
+            width: 300px;
+            height: 200px;
+            border: 1px solid aquamarine;
+            margin: auto;
+        }
+        .calc_box .content{
+            position: relative;
+            top:calc((100% - 70px) / 2);
+            margin: auto;
+            height: 100px;
+        }
+        .re_tr_box{
+            width: 300px;
+            height: 200px;
+            border: 1px solid aquamarine;
+            margin: auto;
+        }
+        .re_tr_box .content{
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+            margin: auto;
+        }
+        .pa_box{
+            width: 300px;
+            border: 1px solid aquamarine;
+            margin: auto;
+            padding: 50px 0;
+        }
+        .pa_box .content{
+            margin: auto;
+        }
+        .wr_box{
+            width: 300px;
+            height: 200px;
+            border: 1px solid aquamarine;
+            margin: 0 auto;
+            writing-mode: tb-lr; /* for ie11 */
+            writing-mode: vertical-lr;
+            text-align: center;
+        }
+        .wr_box .content{
+            display: inline-block; /* for ie & edge */
+            width: 100%;
+            writing-mode: lr-tb;
+            margin: auto;
+            text-align: left;
+        }
+        .wr_box .text{
+            width: 80%;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+    <!--
+        1.line-height
+        适用场景：适用于单行文字居中。
+        用法：将单行文字的行高设定后，文字会位于行高的垂直中间位置。
+    -->
+    <h4>1.line-height垂直居中</h4>
+    <div class="lhCenter">line-height垂直居中</div>
+    <!--
+        2.line-height+inline-block
+        适用场景：多对象垂直居中
+        用法：将多个元素或者多行元素多包一层，并将其设置成inline-block.
+    -->
+    <h4>2.line-height+inline-block垂直居中</h4>
+    <div class="lh_in_box">
+        <div class="content">
+            <p>很多文字文字文字</p>
+            <p>很多文字文字文字</p>
+            <p>很多文字文字文字</p>
+        </div>
+    </div>
+    <!--
+        3.:before + inline-block
+        适用场景：多对象的css垂直居中
+        用法：:before 伪类元素搭配 inline-block 属性的写法应该是很传统的垂直居中的技巧了，
+        此方式的好处在于子元素居中可以不需要特别设定高度，我们将利用:before伪类元素设定为100%高
+        的inline-block，再搭配上将需要居中的子元素同样设置成inline-block性质后，
+        就能使用vertical-align:middle来达到垂直居中的目的了，此方式在以往其实是个非常棒的垂
+        直居中解决方案，唯独需要特别处理掉inline-block元素之间的4-5px空间这个小缺陷，但也很实用了。
+    -->
+    <h4>3.:before + inline-block垂直居中</h4>
+    <div class="be_in_box">
+        <div class="content">
+            <p>很多文字文字文字</p>
+            <p>很多文字文字文字</p>
+            <p>很多文字文字文字</p>
+        </div>
+    </div>
+    <!--
+        4. absolute + margin负值
+        适用场景：多对象的css垂直居中
+        用法：绝对定位在这个例子中会设置top:50%来抓取空间高度的50%，接着在将居中元素的margin-top
+        设定为负一半的高度，这样就能让元素居中了，
+    -->
+    <h4>4.absolute + margin负值垂直居中</h4>
+    <div class="ab_ma_box">
+        <div class="content">
+            <span>很多文字文字文字</span>
+            <span>很多文字文字文字</span>
+            <span>很多文字文字文字</span>
+        </div>
+    </div>
+    <!--
+        5.absolute + margin auto
+        适用场景：多行文字的垂直居中
+        用法：又一个绝对定位的垂直居中的方案，这个方式比较特别一点，当元素设置为绝对定位后，假设它是抓
+        不到整体可运用的空间范围，所以margin:auto会失效，但当你设置了top:0;bottom:0;时，绝对定位
+        元素就抓到了可运用的空间了，这时你的margin:auto就生效了（神奇吧），如果你的绝对定位元素需要
+        水平居中于父层，那你同样可以设定left:0;right:0;来让绝对定位元素取得空间可运用范围，
+        再让marign-left与margin-right设定为auto即可居中。但此方式的缺点是你的定位元素必须有固定的
+        宽高（百分比也算）才能正常居中。
+    -->
+    <h4>5.absolute + margin auto垂直居中</h4>
+    <div class="ab_ma_au_box">
+        <div class="content">
+            <span>很多文字文字文字</span>
+            <span>很多文字文字文字</span>
+            <span>很多文字文字文字</span>
+        </div>
+    </div>
+    <!--
+        6.absolute + translate
+        适用场景：多行文字垂直居中
+        用法：此方式不需要元素有固定的宽高，利用绝对定位时的top,与right设置的元素的上方跟左右各为50%，再利用translate(-50%,-50%)位移居中元素自身宽与高的50%就能达成居中的目的了
+    -->
+    <h4>6.absolute + translate垂直居中</h4>
+    <div class="ab_tr_box">
+        <div class="content">
+            <span>很多文字文字文字</span>
+            <span>很多文字文字文字</span>
+            <span>很多文字文字文字</span>
+        </div>
+    </div>
+    <!--
+        7.flex + align-item
+        用法：父元素设为flex,看主轴方向分别用align-item和justify-content设置垂直居中
+        当只需要个别子元素居中时可以用align-self居中子元素
+    -->
+    <h4>7.flex + align-item垂直居中</h4>
+    <div class="fl_box">
+        <div class="content">
+            <span>很多文字文字文字</span>
+            <span>很多文字文字文字</span>
+            <span>很多文字文字文字</span>
+        </div>
+    </div>
+    <!--
+        8.flex + :before + flex-grow
+    适用场景：多行文字垂直居中
+    用法：Flex有多种方式可以让你把数据居中，适用Flex-grow的延展特性来达成，
+    这个例子中适用了flex-direction:column直式排法，搭配:before伪元素
+    适用flex-grow伸展值能够取得剩下所有空间的特性，把它设定成一半的剩余空间
+    就能做到把内容数据准确的推到垂直中间位置，算是个传统技法的延伸方式。这样
+    的话上面第七个方式不是比较快？
+    -->
+    <h4>8.flex + :before + flex-grow垂直居中</h4>
+    <div class="fl_be_gr_box">
+        <div class="content">
+            <span>很多文字文字文字</span>
+            <span>很多文字文字文字</span>
+            <span>很多文字文字文字</span>
+        </div>
+    </div>
+    <!--
+        9.flex + margin
+    适用场景：多行文字垂直居中
+    用法：用Flex来居中，由于Flex元素对空间解读的特殊性，我们只要在父层元素
+    设定display:flex，接着在需要垂直居中的元素上设定margin:auto，即可自动居中
+    -->
+    <h4>9.flex + margin垂直居中</h4>
+    <div class="fl_ma_box">
+        <div class="content">
+            <span>很多文字文字文字</span>
+            <span>很多文字文字文字</span>
+            <span>很多文字文字文字</span>
+        </div>
+    </div>
+    <!--
+        10.flex + align-content
+    适用场景：多行文字垂直居中
+    用法：在正常的状况下，align-content 仅能对次轴多行flex item做居中，
+    但是当我今天子层元素不确定有多少个时，且有时可能会有单个的情况出现时，
+    此技巧就能用到了（当然你也能有其他解法），既然是多行子元素才能用，
+    那我们就为单个子组件多加两个兄弟吧，使用:before以及:after 来让子元素增加到多个，
+    这样就能使用flex的align-content属性来居中
+    -->
+    <h4>10.flex + align-content 垂直居中</h4>
+    <div class="fl_alc_box">
+        <div class="content">
+            <span>很多文字文字文字</span>
+            <span>很多文字文字文字</span>
+            <span>很多文字文字文字</span>
+        </div>
+    </div>
+    <!--
+        11.gird + template
+    适用场景：多行文字垂直居中
+    用法：css gird template 把块级元素当画布在使用，我们仅需要把模板设置成三列，就能搞定垂直居中
+    -->
+    <h4>11.grid + template 垂直居中</h4>
+    <div class="gr_te_box">
+        <div class="content">
+            <span>很多文字文字文字</span>
+            <span>很多文字文字文字</span>
+            <span>很多文字文字文字</span>
+        </div>
+    </div>
+    <!--
+        12.grid + align-content/align-items/align-self
+    适用场景：多行文字垂直居中
+    -->
+    <h4>12.gird + align-items/align-content/align-self 垂直居中</h4>
+    <div class="gr_al_box">
+        <div class="content">
+            <span>很多文字文字文字</span>
+            <span>很多文字文字文字</span>
+            <span>很多文字文字文字</span>
+        </div>
+    </div>
+    <!--
+        13.grid + place-items/place-content
+    适用场景：多行文字垂直居中
+    用法：place-items这属性不知道有多少人用过，此属性是align-items与justify-items的缩写，
+    简单的说就是水平与垂直的对齐方式，想当然的，设定center就能居中
+    -->
+    <h4>13.gird + place-items/place-content 垂直居中</h4>
+    <div class="gr_pl_box">
+        <div class="content">
+            <span>很多文字文字文字</span>
+            <span>很多文字文字文字</span>
+            <span>很多文字文字文字</span>
+        </div>
+    </div>
+    <!--
+        14.grid + margin
+    适用场景：多行文字垂直居中
+    用法：继续用Grid来居中，由于Grid元素对空间解读的特殊性，我们只要在父层元素设定display:grid，
+    接着在需要垂直居中的元素上设置margin:auto即可自动居中
+    -->
+    <h4>14.gird + margin 垂直居中</h4>
+    <div class="gr_ma_box">
+        <div class="content">
+            <span>很多文字文字文字</span>
+            <span>很多文字文字文字</span>
+            <span>很多文字文字文字</span>
+        </div>
+    </div>
+    <!--
+        15.Display：table-cell
+    适用场景：多行文字垂直居中
+    用法：使用 CSS display属性将div设置成表格的单元格，这样就能利用支持
+    存储单元格对齐的vertical-align属性来将信息垂直居中
+    -->
+    <h4>15.table-cell 垂直居中</h4>
+    <div style="margin: auto;width: 300px">
+        <div class="ta_box">
+            <div class="content">
+                <span>很多文字文字文字</span>
+                <span>很多文字文字文字</span>
+                <span>很多文字文字文字</span>
+            </div>
+        </div>
+    </div>
+    <!--
+        16.calc
+        适用场景：多行文字垂直居中
+        用法：Cale是计算机英文单词calculator的缩写，这个由微软提出的css 方法，真的是网页开发者
+        的一个福音。我们竟然可以在网页中直接做计算，这真是太猛了，从此我们再也不用在那边绞尽脑汁的
+        数学计算了，或是想办法用js来动态计算，我们可以很轻松的利用calc()这个方法，来将百分比及时
+        且动态的计算出实际要的是什么高度，真可谓是划时代的一个方法啊，但这个方法需要注意的是大量使
+        用的话，网页性能会是比较差的，所以请谨慎使用。
+      -->
+    <h4>16.calc 垂直居中</h4>
+    <div class="calc_box">
+        <div class="content">
+            <span>很多文字文字文字</span>
+            <span>很多文字文字文字</span>
+            <span>很多文字文字文字</span>
+        </div>
+    </div>
+    <!--
+        17.Relative + translateY
+        适用场景：多行文字垂直居中
+        这个技巧是利用了top:50%的招式，让你的元素上方能产生固定百分比的距离，
+        接着让要居中的元素本身使用tanslateY的百分比来达成垂直居中的需求，
+        translate是一个很棒的属性，由于translate的百分比单位是利用元素自身的
+        尺寸作为100%，这样让我们要利用元素自身宽高做事变得方便很多。
+      -->
+    <h4>17.Relative + translateY 垂直居中</h4>
+    <div class="re_tr_box">
+        <div class="content">
+            <span>很多文字文字文字</span>
+            <span>很多文字文字文字</span>
+            <span>很多文字文字文字</span>
+        </div>
+    </div>
+    <!--
+        18.padding
+        适用场景：多行文字垂直居中
+      -->
+    <h4>18.padding 垂直居中</h4>
+    <div class="pa_box">
+        <div class="content">
+            <span>很多文字文字文字</span>
+            <span>很多文字文字文字</span>
+            <span>很多文字文字文字</span>
+        </div>
+    </div>
+    <!--
+        19.Write-mode
+        适用场景：多行文字垂直居中
+        用法：这个方式应该是比较少见到的有人使用的了，这个想法是被老友Paul所激发的，
+        write-mode这个css属性的功能基本上跟垂直居中是八竿子打不着，它的用途是改变
+        文字书写的方向从横变竖，且支持度从很早期的IE5就有支持了，但当时Amos很少使用，
+        一来是网页多是横书较多，另外当时除了IE浏览器意外，其他浏览器的支持度都不是很好，
+        也就很少使用了。
+
+        使用write-mode将一整个文字容器变成直书，接着将此容器利用text-align:center来
+        达到垂直居中的目的，白话一点的解说就是，你把原本横排的文字变成竖排，所以原本横排用
+        到的水平对齐方式，就变成了控制直排的中间了，原理就是这么简单。但要特别注意的是浏览器
+        对此语法的支持度来说，需要拆开写法才行，不然某些浏览器的语法不同，可能会让你的网页在
+        某些浏览器上看起来无效，这会是最需要注意到的
+      -->
+    <h4>19.Write-mode 垂直居中</h4>
+    <div class="wr_box">
+        <div class="content">
+            <div class="text">
+                <span>很多文字文字文字</span>
+                <span>很多文字文字文字</span>
+                <span>很多文字文字文字</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
