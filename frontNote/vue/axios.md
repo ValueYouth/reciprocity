@@ -198,3 +198,40 @@ axios.get('/user/12345', {
   }
 })
 ````
+
+##关于vue中使用axios处理post方法导出excel表格（后端返回文件流）
+[参考来源](http://www.mamicode.com/info-detail-2357755.html)
+
+1.请求函数
+````
+exportExcel: function(form) {
+        return axios({ // 用axios发送post请求
+            method: ‘post‘,
+            url: ‘/serviceTime/exportData‘, // 请求地址
+            data: form, // 参数
+            responseType: ‘blob‘, // 表明返回服务器返回的数据类型
+            headers: {
+                ‘Content-Type‘: ‘application/json‘
+            }
+        })
+    }
+````
+2.导出函数
+
+````
+const params = {
+    test: ‘111
+}
+exportExcel(params).then(res => { // 处理返回的文件流
+    const blob = new Blob([res]);
+    const fileName = ‘统计.xlsx‘;
+    const elink = document.createElement(‘a‘);
+    elink.download = fileName;
+    elink.style.display = ‘none‘;
+    elink.href = URL.createObjectURL(blob);
+    document.body.appendChild(elink);
+    elink.click();
+    URL.revokeObjectURL(elink.href); // 释放URL 对象
+    document.body.removeChild(elink);
+})
+````
