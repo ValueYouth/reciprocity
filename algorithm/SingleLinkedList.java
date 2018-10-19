@@ -1,13 +1,20 @@
-package com.fujfu.test;
+package com.iromfeed.test;
 
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.Test;
 
 @Slf4j
 @Data
 public class SingleLinkedList {
-
+    /**
+     * 默认链表
+     */
     private Node head;
+
+    /**
+     * 链表长度/大小
+     */
     private int size;
 
 
@@ -17,25 +24,32 @@ public class SingleLinkedList {
     }
 
     /**
-     * ������ת
-     *
+     * 链表反转-非递归 带头结点
      */
     private void reverse() {
-        Node prev = null;
-        Node current = head.next;
+        Node current = head.next; // head.next 首元结点
+        Node prev = null; // 前驱结点
+        Node next = null; // 后驱结点
 
         while (current != null) {
-            Node next = current.next;
+            next = current.next;
+            // 到达链表尾部（也就是反转后链表的首元结点），头结点指向首元结点
             if (next == null) {
                 head.next = current;
             }
 
-            current.next = prev;
-            prev = current;
-            current = next;
+            current.next = prev; // 当前结点指向其前驱结点
+            prev = current; // 当前结点变为前驱结点，为下一结点转换做准备
+            current = next; // 当前结点移动至下一个结点
         }
     }
 
+    /**
+     * 链表反转-递归 无头结点
+     *
+     * @param head 原链表
+     * @return 反转后的链表
+     */
     private Node reverse(Node head) {
         if(head == null || head.next == null){
             return head;
@@ -45,10 +59,14 @@ public class SingleLinkedList {
 
         head.next.next = head;
         head.next = null;
-
         return node;
     }
 
+    /**
+     * 尾插法
+     *
+     * @param data 待插入数据
+     */
     public void append(Object data) {
         Node newNode = new Node(data);
 
@@ -61,9 +79,12 @@ public class SingleLinkedList {
         this.size++;
     }
 
+    /**
+     * 遍历链表
+     */
     private void traverse() {
         log.info("traverse...");
-        Node node = head.next; // ��ͷ���
+        Node node = head.next; // 有头结点
 
         while (node != null) {
             System.out.println(node.data.toString());
@@ -71,12 +92,23 @@ public class SingleLinkedList {
         }
     }
 
+    /**
+     * 初始化链表数据
+     */
     private void init() {
         for (int i = 0; i < 10; i++) {
             append(i);
         }
     }
 
+    @Test
+    public void test() {
+        init();
+//        head = reverse(head.next);
+        reverse();
+        System.out.println(head);
+        traverse();
+    }
 
     @Data
     private static class Node {
