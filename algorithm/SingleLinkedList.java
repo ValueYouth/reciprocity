@@ -67,7 +67,7 @@ public class SingleLinkedList {
      *
      * @param data 待插入数据
      */
-    public void append(Object data) {
+    private void append(Object data) {
         Node newNode = new Node(data);
 
         Node temp = head;
