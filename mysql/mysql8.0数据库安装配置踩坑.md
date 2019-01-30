@@ -18,3 +18,16 @@
 
 ### 首次修改密码
 * 控制台命令：`mysqladmin -u root -p password new_password`，new_password指的是新密码
+
+### 忘记密码
+* 删除data文件夹
+* 重新初始化：`mysqld --initialize --console`
+
+附重启日志：
+```log
+C:\Program Files\mysql-8.0.12-winx64\bin>mysqld --initialize --console
+2019-01-30T07:58:57.584921Z 0 [System] [MY-013169] [Server] C:\Program Files\mysql-8.0.12-winx64\bin\mysqld.exe (mysqld 8.0.12) initializing of server in progress as process 4520
+2019-01-30T07:59:00.304874Z 5 [Note] [MY-010454] [Server] A temporary password is generated for root@localhost: X/9pnR<CpMap
+2019-01-30T07:59:02.091384Z 0 [System] [MY-013170] [Server] C:\Program Files\mysql-8.0.12-winx64\bin\mysqld.exe (mysqld 8.0.12) initializing of server has completed
+```
+打印出来的第二行日志即为临时密码所在行，上述临时密码为：X/9pnR<CpMap
