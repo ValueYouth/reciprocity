@@ -37,3 +37,5 @@ C:\Program Files\mysql-8.0.12-winx64\bin>mysqld --initialize --console
 * show databases;
 * use mysql;
 * ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '新密码';
+
+附：mysql8.0以上密码策略限制必须要大小写加数字特殊符号
