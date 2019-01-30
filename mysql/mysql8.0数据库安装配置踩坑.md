@@ -31,3 +31,9 @@ C:\Program Files\mysql-8.0.12-winx64\bin>mysqld --initialize --console
 2019-01-30T07:59:02.091384Z 0 [System] [MY-013170] [Server] C:\Program Files\mysql-8.0.12-winx64\bin\mysqld.exe (mysqld 8.0.12) initializing of server has completed
 ```
 打印出来的第二行日志即为临时密码所在行，上述临时密码为：X/9pnR<CpMap
+
+### 修改密码
+* mysql -u root -p '原来的密码'   //进入数据库中
+* show databases;
+* use mysql;
+* ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '新密码';
