@@ -1,11 +1,5 @@
-package com.iromfeed.test;
+package algorithm;
 
-import lombok.Data;
-import lombok.extern.slf4j.Slf4j;
-import org.junit.Test;
-
-@Slf4j
-@Data
 public class SingleLinkedList {
     /**
      * 默认链表
@@ -83,7 +77,7 @@ public class SingleLinkedList {
      * 遍历链表
      */
     private void traverse() {
-        log.info("traverse...");
+//        log.info("traverse...");
         Node node = head.next; // 有头结点
 
         while (node != null) {
@@ -101,7 +95,6 @@ public class SingleLinkedList {
         }
     }
 
-    @Test
     public void test() {
         init();
 //        head = reverse(head.next);
@@ -110,7 +103,6 @@ public class SingleLinkedList {
         traverse();
     }
 
-    @Data
     private static class Node {
         Object data;
         Node next;

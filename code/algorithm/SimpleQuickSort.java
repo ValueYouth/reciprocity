@@ -1,4 +1,4 @@
-package com.romfeed.algorithmdemo;
+package algorithm;
 
 /**
  * 类说明：简单快速排序算法
@@ -13,7 +13,7 @@ public class SimpleQuickSort {
 	 * @param args 预设参数
 	 */
 	public static void main(String[] args) {
-		int[] numbers = {25, 25, 36, 95, 12, 68, 101};
+		int[] numbers = {25, 10, 36, 95, 12, 68, 101};
 		SimpleQuickSort simpleQuickSort = new SimpleQuickSort();
 		
 		simpleQuickSort.quickSort(numbers, 0, numbers.length - 1);

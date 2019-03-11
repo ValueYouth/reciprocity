@@ -1,4 +1,4 @@
-package com.valueyouth.algorithmdemo;
+package algorithm;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
