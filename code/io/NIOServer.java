@@ -1,12 +1,10 @@
-package concurrent;
+package io;
 
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
-import java.nio.channels.SelectionKey;
-import java.nio.channels.Selector;
-import java.nio.channels.ServerSocketChannel;
-import java.nio.channels.SocketChannel;
+import java.net.SocketAddress;
+import java.nio.channels.*;
 import java.nio.charset.Charset;
 import java.util.Iterator;
 import java.util.Set;
@@ -41,8 +39,41 @@ public class NIOServer extends Thread {
         }
     }
 
-    private void proccess() throws IOException {
-        Selector selector = Selector.open();
+    /**
+     * NIO则是利用了单线程轮询事件的机制，通过高效地定位就绪的Channel，来决定做什么
+     *
+     * @throws IOException IO异常
+     */
+    private void synIO() throws IOException {
+        // 创建selector和channel
+        Selector selector = Selector.open(); // 创建selector
+        ServerSocketChannel channel = ServerSocketChannel.open(); // 创建channel
+
+        // channel绑定地址和端口号
+        SocketAddress address = new InetSocketAddress(InetAddress.getLocalHost(), 8888);
+        channel.bind(address); // 绑定地址和端口
+
+        // channel向selector注册
+        channel.register(selector, SelectionKey.OP_ACCEPT);
+    }
+
+    private void asynIO() throws IOException {
+        AsynchronousServerSocketChannel channel = AsynchronousServerSocketChannel.open();
+        SocketAddress address = new InetSocketAddress(InetAddress.getLocalHost(), 8888);
+        channel.bind(address);
+
+        channel.accept(channel, new CompletionHandler<AsynchronousSocketChannel, AsynchronousServerSocketChannel>() {
+            @Override
+            public void completed(AsynchronousSocketChannel result, AsynchronousServerSocketChannel attachment) {
+                channel.accept(channel, this);
+            }
+
+            @Override
+            public void failed(Throwable exc, AsynchronousServerSocketChannel attachment) {
+
+            }
+        });
+
     }
 
     private void sayHelloWorld(ServerSocketChannel server) throws IOException {
@@ -50,5 +81,4 @@ public class NIOServer extends Thread {
             client.write(Charset.defaultCharset().encode("Hello world!"));
         }
     }
-    // 省略了与前面类似的main
 }
