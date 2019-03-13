@@ -2,6 +2,7 @@ package io;
 
 import java.io.*;
 import java.nio.channels.FileChannel;
+import java.nio.file.Files;
 
 public class FileCopy {
 
@@ -42,5 +43,10 @@ public class FileCopy {
 
         sourceChannel.close();
         destChannel.close();
+    }
+
+    private static void copyWithUtils() throws IOException {
+        OutputStream out = new FileOutputStream("readme.txt");
+        Files.copy(new File("readme.md").toPath(), out);
     }
 }
